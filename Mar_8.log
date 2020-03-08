@@ -1,0 +1,1085 @@
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\user\Documents\Mar_8.log
+  log type:  text
+ opened on:   8 Mar 2020, 22:06:56
+
+.  
+. use "D:\Proxypool\company_name_unique_list.dta", clear
+
+. //gen len=length(name)
+. //drop if len>256  
+. //recast str256 name //previous exploration suggesr that this var is in strL type, which cause the merge function to fail
+. 
+. describe 
+
+Contains data from D:\Proxypool\company_name_unique_list.dta
+  obs:     4,548,821                          
+ vars:             1                          8 Mar 2020 10:26
+ size: 1,164,498,176                          
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+              storage   display    value
+variable name   type    format     label      variable label
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+name            str256  %256s                 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+Sorted by: 
+
+. 
+. gen matched=0
+
+. 
+. 
+. forvalues k =1/146{
+  2. 
+. cap noi{ 
+  3. merge 1:1 name using "D:\Proxypool\company_basic_all_`k'.dta"
+  4. drop if _merge==2 //drop unmatched from using
+  5. replace matched=1 if _merge==3 // to count the # of successful match in total
+  6. drop _merge //incase of conflicts of gen _m again next loop
+  7. display `k' //to check how many cases of failing merge
+  8. }
+  9. 
+. }
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,626,413
+        from master                 4,537,617  (_merge==1)
+        from using                     88,796  (_merge==2)
+
+    matched                            11,204  (_merge==3)
+    -----------------------------------------
+(88,796 observations deleted)
+(11,204 real changes made)
+1
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,618,929
+        from master                 4,533,875  (_merge==1)
+        from using                     85,054  (_merge==2)
+
+    matched                            14,946  (_merge==3)
+    -----------------------------------------
+(85,054 observations deleted)
+(14,946 real changes made)
+2
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,646,565
+        from master                 4,547,693  (_merge==1)
+        from using                     98,872  (_merge==2)
+
+    matched                             1,128  (_merge==3)
+    -----------------------------------------
+(98,872 observations deleted)
+(1,128 real changes made)
+3
+variable name does not uniquely identify observations in the using data
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,646,851
+        from master                 4,547,836  (_merge==1)
+        from using                     99,015  (_merge==2)
+
+    matched                               985  (_merge==3)
+    -----------------------------------------
+(99,015 observations deleted)
+(985 real changes made)
+5
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,647,963
+        from master                 4,548,392  (_merge==1)
+        from using                     99,571  (_merge==2)
+
+    matched                               429  (_merge==3)
+    -----------------------------------------
+(99,571 observations deleted)
+(429 real changes made)
+6
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,648,015
+        from master                 4,548,418  (_merge==1)
+        from using                     99,597  (_merge==2)
+
+    matched                               403  (_merge==3)
+    -----------------------------------------
+(99,597 observations deleted)
+(403 real changes made)
+7
+variable name does not uniquely identify observations in the using data
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,630,167
+        from master                 4,539,494  (_merge==1)
+        from using                     90,673  (_merge==2)
+
+    matched                             9,327  (_merge==3)
+    -----------------------------------------
+(90,673 observations deleted)
+(9,327 real changes made)
+9
+(note: variable name was str256, now str285 to accommodate using data's values)
+variable name does not uniquely identify observations in the using data
+variable name does not uniquely identify observations in the using data
+variable name does not uniquely identify observations in the using data
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,618,037
+        from master                 4,533,429  (_merge==1)
+        from using                     84,608  (_merge==2)
+
+    matched                            15,392  (_merge==3)
+    -----------------------------------------
+(84,608 observations deleted)
+(15,357 real changes made)
+13
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,621,793
+        from master                 4,535,307  (_merge==1)
+        from using                     86,486  (_merge==2)
+
+    matched                            13,514  (_merge==3)
+    -----------------------------------------
+(86,486 observations deleted)
+(13,506 real changes made)
+14
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,625,109
+        from master                 4,536,965  (_merge==1)
+        from using                     88,144  (_merge==2)
+
+    matched                            11,856  (_merge==3)
+    -----------------------------------------
+(88,144 observations deleted)
+(11,853 real changes made)
+15
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,625,185
+        from master                 4,537,003  (_merge==1)
+        from using                     88,182  (_merge==2)
+
+    matched                            11,818  (_merge==3)
+    -----------------------------------------
+(88,182 observations deleted)
+(11,817 real changes made)
+16
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,645,389
+        from master                 4,547,105  (_merge==1)
+        from using                     98,284  (_merge==2)
+
+    matched                             1,716  (_merge==3)
+    -----------------------------------------
+(98,284 observations deleted)
+(1,716 real changes made)
+17
+variable name does not uniquely identify observations in the using data
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,644,839
+        from master                 4,546,830  (_merge==1)
+        from using                     98,009  (_merge==2)
+
+    matched                             1,991  (_merge==3)
+    -----------------------------------------
+(98,009 observations deleted)
+(1,991 real changes made)
+19
+variable name does not uniquely identify observations in the using data
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,631,221
+        from master                 4,540,021  (_merge==1)
+        from using                     91,200  (_merge==2)
+
+    matched                             8,800  (_merge==3)
+    -----------------------------------------
+(91,200 observations deleted)
+(8,799 real changes made)
+21
+variable name does not uniquely identify observations in the using data
+variable name does not uniquely identify observations in the using data
+variable name does not uniquely identify observations in the using data
+(note: variable name was str285, now str292 to accommodate using data's values)
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,631,099
+        from master                 4,539,960  (_merge==1)
+        from using                     91,139  (_merge==2)
+
+    matched                             8,861  (_merge==3)
+    -----------------------------------------
+(91,139 observations deleted)
+(8,858 real changes made)
+25
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,633,531
+        from master                 4,541,176  (_merge==1)
+        from using                     92,355  (_merge==2)
+
+    matched                             7,645  (_merge==3)
+    -----------------------------------------
+(92,355 observations deleted)
+(7,645 real changes made)
+26
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,629,697
+        from master                 4,539,259  (_merge==1)
+        from using                     90,438  (_merge==2)
+
+    matched                             9,562  (_merge==3)
+    -----------------------------------------
+(90,438 observations deleted)
+(9,562 real changes made)
+27
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,631,753
+        from master                 4,540,287  (_merge==1)
+        from using                     91,466  (_merge==2)
+
+    matched                             8,534  (_merge==3)
+    -----------------------------------------
+(91,466 observations deleted)
+(8,532 real changes made)
+28
+variable name does not uniquely identify observations in the using data
+variable name does not uniquely identify observations in the using data
+variable name does not uniquely identify observations in the using data
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,630,653
+        from master                 4,539,737  (_merge==1)
+        from using                     90,916  (_merge==2)
+
+    matched                             9,084  (_merge==3)
+    -----------------------------------------
+(90,916 observations deleted)
+(9,081 real changes made)
+32
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,622,627
+        from master                 4,535,724  (_merge==1)
+        from using                     86,903  (_merge==2)
+
+    matched                            13,097  (_merge==3)
+    -----------------------------------------
+(86,903 observations deleted)
+(13,097 real changes made)
+33
+variable name does not uniquely identify observations in the using data
+variable name does not uniquely identify observations in the using data
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,636,675
+        from master                 4,542,748  (_merge==1)
+        from using                     93,927  (_merge==2)
+
+    matched                             6,073  (_merge==3)
+    -----------------------------------------
+(93,927 observations deleted)
+(6,073 real changes made)
+36
+variable name does not uniquely identify observations in the using data
+variable name does not uniquely identify observations in the using data
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,634,641
+        from master                 4,541,731  (_merge==1)
+        from using                     92,910  (_merge==2)
+
+    matched                             7,090  (_merge==3)
+    -----------------------------------------
+(92,910 observations deleted)
+(7,090 real changes made)
+39
+variable name does not uniquely identify observations in the using data
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,631,193
+        from master                 4,540,007  (_merge==1)
+        from using                     91,186  (_merge==2)
+
+    matched                             8,814  (_merge==3)
+    -----------------------------------------
+(91,186 observations deleted)
+(8,814 real changes made)
+41
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,633,101
+        from master                 4,540,961  (_merge==1)
+        from using                     92,140  (_merge==2)
+
+    matched                             7,860  (_merge==3)
+    -----------------------------------------
+(92,140 observations deleted)
+(7,857 real changes made)
+42
+variable name does not uniquely identify observations in the using data
+variable name does not uniquely identify observations in the using data
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,638,953
+        from master                 4,543,887  (_merge==1)
+        from using                     95,066  (_merge==2)
+
+    matched                             4,934  (_merge==3)
+    -----------------------------------------
+(95,066 observations deleted)
+(4,934 real changes made)
+45
+variable name does not uniquely identify observations in the using data
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,634,581
+        from master                 4,541,701  (_merge==1)
+        from using                     92,880  (_merge==2)
+
+    matched                             7,120  (_merge==3)
+    -----------------------------------------
+(92,880 observations deleted)
+(7,111 real changes made)
+47
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,635,165
+        from master                 4,541,993  (_merge==1)
+        from using                     93,172  (_merge==2)
+
+    matched                             6,828  (_merge==3)
+    -----------------------------------------
+(93,172 observations deleted)
+(6,812 real changes made)
+48
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,636,531
+        from master                 4,542,676  (_merge==1)
+        from using                     93,855  (_merge==2)
+
+    matched                             6,145  (_merge==3)
+    -----------------------------------------
+(93,855 observations deleted)
+(6,118 real changes made)
+49
+variable name does not uniquely identify observations in the using data
+variable name does not uniquely identify observations in the using data
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,634,285
+        from master                 4,541,553  (_merge==1)
+        from using                     92,732  (_merge==2)
+
+    matched                             7,268  (_merge==3)
+    -----------------------------------------
+(92,732 observations deleted)
+(7,252 real changes made)
+52
+variable name does not uniquely identify observations in the using data
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,641,975
+        from master                 4,545,398  (_merge==1)
+        from using                     96,577  (_merge==2)
+
+    matched                             3,423  (_merge==3)
+    -----------------------------------------
+(96,577 observations deleted)
+(3,399 real changes made)
+54
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,623,567
+        from master                 4,536,194  (_merge==1)
+        from using                     87,373  (_merge==2)
+
+    matched                            12,627  (_merge==3)
+    -----------------------------------------
+(87,373 observations deleted)
+(12,617 real changes made)
+55
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,637,637
+        from master                 4,543,229  (_merge==1)
+        from using                     94,408  (_merge==2)
+
+    matched                             5,592  (_merge==3)
+    -----------------------------------------
+(94,408 observations deleted)
+(5,580 real changes made)
+56
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,627,045
+        from master                 4,537,933  (_merge==1)
+        from using                     89,112  (_merge==2)
+
+    matched                            10,888  (_merge==3)
+    -----------------------------------------
+(89,112 observations deleted)
+(10,888 real changes made)
+57
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,631,007
+        from master                 4,539,914  (_merge==1)
+        from using                     91,093  (_merge==2)
+
+    matched                             8,907  (_merge==3)
+    -----------------------------------------
+(91,093 observations deleted)
+(8,906 real changes made)
+58
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,629,257
+        from master                 4,539,039  (_merge==1)
+        from using                     90,218  (_merge==2)
+
+    matched                             9,782  (_merge==3)
+    -----------------------------------------
+(90,218 observations deleted)
+(9,778 real changes made)
+59
+variable name does not uniquely identify observations in the using data
+variable name does not uniquely identify observations in the using data
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,629,169
+        from master                 4,538,995  (_merge==1)
+        from using                     90,174  (_merge==2)
+
+    matched                             9,826  (_merge==3)
+    -----------------------------------------
+(90,174 observations deleted)
+(9,813 real changes made)
+62
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,634,581
+        from master                 4,541,701  (_merge==1)
+        from using                     92,880  (_merge==2)
+
+    matched                             7,120  (_merge==3)
+    -----------------------------------------
+(92,880 observations deleted)
+(7,112 real changes made)
+63
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,634,591
+        from master                 4,541,706  (_merge==1)
+        from using                     92,885  (_merge==2)
+
+    matched                             7,115  (_merge==3)
+    -----------------------------------------
+(92,885 observations deleted)
+(7,115 real changes made)
+64
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,633,789
+        from master                 4,541,305  (_merge==1)
+        from using                     92,484  (_merge==2)
+
+    matched                             7,516  (_merge==3)
+    -----------------------------------------
+(92,484 observations deleted)
+(7,502 real changes made)
+65
+variable name does not uniquely identify observations in the using data
+variable name does not uniquely identify observations in the using data
+variable name does not uniquely identify observations in the using data
+variable name does not uniquely identify observations in the using data
+variable name does not uniquely identify observations in the using data
+variable name does not uniquely identify observations in the using data
+variable name does not uniquely identify observations in the using data
+variable name does not uniquely identify observations in the using data
+variable name does not uniquely identify observations in the using data
+variable name does not uniquely identify observations in the using data
+variable name does not uniquely identify observations in the using data
+variable name does not uniquely identify observations in the using data
+variable name does not uniquely identify observations in the using data
+variable name does not uniquely identify observations in the using data
+variable name does not uniquely identify observations in the using data
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,646,973
+        from master                 4,547,897  (_merge==1)
+        from using                     99,076  (_merge==2)
+
+    matched                               924  (_merge==3)
+    -----------------------------------------
+(99,076 observations deleted)
+(921 real changes made)
+81
+variable name does not uniquely identify observations in the using data
+variable name does not uniquely identify observations in the using data
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,632,997
+        from master                 4,540,909  (_merge==1)
+        from using                     92,088  (_merge==2)
+
+    matched                             7,912  (_merge==3)
+    -----------------------------------------
+(92,088 observations deleted)
+(7,898 real changes made)
+84
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,631,211
+        from master                 4,540,016  (_merge==1)
+        from using                     91,195  (_merge==2)
+
+    matched                             8,805  (_merge==3)
+    -----------------------------------------
+(91,195 observations deleted)
+(8,803 real changes made)
+85
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,644,869
+        from master                 4,546,845  (_merge==1)
+        from using                     98,024  (_merge==2)
+
+    matched                             1,976  (_merge==3)
+    -----------------------------------------
+(98,024 observations deleted)
+(1,976 real changes made)
+86
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,642,347
+        from master                 4,545,584  (_merge==1)
+        from using                     96,763  (_merge==2)
+
+    matched                             3,237  (_merge==3)
+    -----------------------------------------
+(96,763 observations deleted)
+(3,237 real changes made)
+87
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,646,179
+        from master                 4,547,500  (_merge==1)
+        from using                     98,679  (_merge==2)
+
+    matched                             1,321  (_merge==3)
+    -----------------------------------------
+(98,679 observations deleted)
+(1,317 real changes made)
+88
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,644,963
+        from master                 4,546,892  (_merge==1)
+        from using                     98,071  (_merge==2)
+
+    matched                             1,929  (_merge==3)
+    -----------------------------------------
+(98,071 observations deleted)
+(1,926 real changes made)
+89
+variable name does not uniquely identify observations in the using data
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,636,555
+        from master                 4,542,688  (_merge==1)
+        from using                     93,867  (_merge==2)
+
+    matched                             6,133  (_merge==3)
+    -----------------------------------------
+(93,867 observations deleted)
+(6,133 real changes made)
+91
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,640,065
+        from master                 4,544,443  (_merge==1)
+        from using                     95,622  (_merge==2)
+
+    matched                             4,378  (_merge==3)
+    -----------------------------------------
+(95,622 observations deleted)
+(4,369 real changes made)
+92
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,644,201
+        from master                 4,546,511  (_merge==1)
+        from using                     97,690  (_merge==2)
+
+    matched                             2,310  (_merge==3)
+    -----------------------------------------
+(97,690 observations deleted)
+(2,306 real changes made)
+93
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,644,553
+        from master                 4,546,687  (_merge==1)
+        from using                     97,866  (_merge==2)
+
+    matched                             2,134  (_merge==3)
+    -----------------------------------------
+(97,866 observations deleted)
+(2,131 real changes made)
+94
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,644,275
+        from master                 4,546,548  (_merge==1)
+        from using                     97,727  (_merge==2)
+
+    matched                             2,273  (_merge==3)
+    -----------------------------------------
+(97,727 observations deleted)
+(2,273 real changes made)
+95
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,644,633
+        from master                 4,546,727  (_merge==1)
+        from using                     97,906  (_merge==2)
+
+    matched                             2,094  (_merge==3)
+    -----------------------------------------
+(97,906 observations deleted)
+(2,094 real changes made)
+96
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,644,685
+        from master                 4,546,753  (_merge==1)
+        from using                     97,932  (_merge==2)
+
+    matched                             2,068  (_merge==3)
+    -----------------------------------------
+(97,932 observations deleted)
+(2,068 real changes made)
+97
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,644,927
+        from master                 4,546,874  (_merge==1)
+        from using                     98,053  (_merge==2)
+
+    matched                             1,947  (_merge==3)
+    -----------------------------------------
+(98,053 observations deleted)
+(1,946 real changes made)
+98
+variable name does not uniquely identify observations in the using data
+variable name does not uniquely identify observations in the using data
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,632,433
+        from master                 4,540,627  (_merge==1)
+        from using                     91,806  (_merge==2)
+
+    matched                             8,194  (_merge==3)
+    -----------------------------------------
+(91,806 observations deleted)
+(8,183 real changes made)
+101
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,635,591
+        from master                 4,542,206  (_merge==1)
+        from using                     93,385  (_merge==2)
+
+    matched                             6,615  (_merge==3)
+    -----------------------------------------
+(93,385 observations deleted)
+(6,611 real changes made)
+102
+variable name does not uniquely identify observations in the using data
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,634,765
+        from master                 4,541,793  (_merge==1)
+        from using                     92,972  (_merge==2)
+
+    matched                             7,028  (_merge==3)
+    -----------------------------------------
+(92,972 observations deleted)
+(7,020 real changes made)
+104
+variable name does not uniquely identify observations in the using data
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,636,033
+        from master                 4,542,427  (_merge==1)
+        from using                     93,606  (_merge==2)
+
+    matched                             6,394  (_merge==3)
+    -----------------------------------------
+(93,606 observations deleted)
+(6,392 real changes made)
+106
+variable name does not uniquely identify observations in the using data
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,636,037
+        from master                 4,542,429  (_merge==1)
+        from using                     93,608  (_merge==2)
+
+    matched                             6,392  (_merge==3)
+    -----------------------------------------
+(93,608 observations deleted)
+(6,388 real changes made)
+108
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,634,069
+        from master                 4,541,445  (_merge==1)
+        from using                     92,624  (_merge==2)
+
+    matched                             7,376  (_merge==3)
+    -----------------------------------------
+(92,624 observations deleted)
+(7,376 real changes made)
+109
+variable name does not uniquely identify observations in the using data
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,626,285
+        from master                 4,537,553  (_merge==1)
+        from using                     88,732  (_merge==2)
+
+    matched                            11,268  (_merge==3)
+    -----------------------------------------
+(88,732 observations deleted)
+(11,267 real changes made)
+111
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,624,719
+        from master                 4,536,770  (_merge==1)
+        from using                     87,949  (_merge==2)
+
+    matched                            12,051  (_merge==3)
+    -----------------------------------------
+(87,949 observations deleted)
+(12,048 real changes made)
+112
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,633,589
+        from master                 4,541,205  (_merge==1)
+        from using                     92,384  (_merge==2)
+
+    matched                             7,616  (_merge==3)
+    -----------------------------------------
+(92,384 observations deleted)
+(7,602 real changes made)
+113
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,630,515
+        from master                 4,539,668  (_merge==1)
+        from using                     90,847  (_merge==2)
+
+    matched                             9,153  (_merge==3)
+    -----------------------------------------
+(90,847 observations deleted)
+(9,153 real changes made)
+114
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,620,007
+        from master                 4,534,414  (_merge==1)
+        from using                     85,593  (_merge==2)
+
+    matched                            14,407  (_merge==3)
+    -----------------------------------------
+(85,593 observations deleted)
+(14,407 real changes made)
+115
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,625,673
+        from master                 4,537,247  (_merge==1)
+        from using                     88,426  (_merge==2)
+
+    matched                            11,574  (_merge==3)
+    -----------------------------------------
+(88,426 observations deleted)
+(11,572 real changes made)
+116
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,607,917
+        from master                 4,528,369  (_merge==1)
+        from using                     79,548  (_merge==2)
+
+    matched                            20,452  (_merge==3)
+    -----------------------------------------
+(79,548 observations deleted)
+(20,451 real changes made)
+117
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,619,601
+        from master                 4,534,211  (_merge==1)
+        from using                     85,390  (_merge==2)
+
+    matched                            14,610  (_merge==3)
+    -----------------------------------------
+(85,390 observations deleted)
+(14,610 real changes made)
+118
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,619,425
+        from master                 4,534,123  (_merge==1)
+        from using                     85,302  (_merge==2)
+
+    matched                            14,698  (_merge==3)
+    -----------------------------------------
+(85,302 observations deleted)
+(14,697 real changes made)
+119
+variable name does not uniquely identify observations in the using data
+variable name does not uniquely identify observations in the using data
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,628,519
+        from master                 4,538,670  (_merge==1)
+        from using                     89,849  (_merge==2)
+
+    matched                            10,151  (_merge==3)
+    -----------------------------------------
+(89,849 observations deleted)
+(10,151 real changes made)
+122
+variable name does not uniquely identify observations in the using data
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,634,915
+        from master                 4,541,868  (_merge==1)
+        from using                     93,047  (_merge==2)
+
+    matched                             6,953  (_merge==3)
+    -----------------------------------------
+(93,047 observations deleted)
+(6,946 real changes made)
+124
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,628,105
+        from master                 4,538,463  (_merge==1)
+        from using                     89,642  (_merge==2)
+
+    matched                            10,358  (_merge==3)
+    -----------------------------------------
+(89,642 observations deleted)
+(10,354 real changes made)
+125
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,620,251
+        from master                 4,534,536  (_merge==1)
+        from using                     85,715  (_merge==2)
+
+    matched                            14,285  (_merge==3)
+    -----------------------------------------
+(85,715 observations deleted)
+(14,281 real changes made)
+126
+variable name does not uniquely identify observations in the using data
+variable name does not uniquely identify observations in the using data
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,629,953
+        from master                 4,539,387  (_merge==1)
+        from using                     90,566  (_merge==2)
+
+    matched                             9,434  (_merge==3)
+    -----------------------------------------
+(90,566 observations deleted)
+(9,421 real changes made)
+129
+variable name does not uniquely identify observations in the using data
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,612,721
+        from master                 4,530,771  (_merge==1)
+        from using                     81,950  (_merge==2)
+
+    matched                            18,050  (_merge==3)
+    -----------------------------------------
+(81,950 observations deleted)
+(18,050 real changes made)
+131
+variable name does not uniquely identify observations in the using data
+variable name does not uniquely identify observations in the using data
+variable name does not uniquely identify observations in the using data
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,639,187
+        from master                 4,544,004  (_merge==1)
+        from using                     95,183  (_merge==2)
+
+    matched                             4,817  (_merge==3)
+    -----------------------------------------
+(95,183 observations deleted)
+(4,811 real changes made)
+135
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,640,337
+        from master                 4,544,579  (_merge==1)
+        from using                     95,758  (_merge==2)
+
+    matched                             4,242  (_merge==3)
+    -----------------------------------------
+(95,758 observations deleted)
+(4,241 real changes made)
+136
+variable name does not uniquely identify observations in the using data
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,603,273
+        from master                 4,526,047  (_merge==1)
+        from using                     77,226  (_merge==2)
+
+    matched                            22,774  (_merge==3)
+    -----------------------------------------
+(77,226 observations deleted)
+(22,774 real changes made)
+138
+variable name does not uniquely identify observations in the using data
+variable name does not uniquely identify observations in the using data
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,626,895
+        from master                 4,537,858  (_merge==1)
+        from using                     89,037  (_merge==2)
+
+    matched                            10,963  (_merge==3)
+    -----------------------------------------
+(89,037 observations deleted)
+(10,963 real changes made)
+141
+variable name does not uniquely identify observations in the using data
+variable name does not uniquely identify observations in the using data
+variable name does not uniquely identify observations in the using data
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                     4,618,505
+        from master                 4,533,663  (_merge==1)
+        from using                     84,842  (_merge==2)
+
+    matched                            15,158  (_merge==3)
+    -----------------------------------------
+(84,842 observations deleted)
+(15,131 real changes made)
+145
+variable name does not uniquely identify observations in the using data
+
+. 
+. summ matched
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+     matched |  4,548,821     .140543    .3475496          0          1
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\user\Documents\Mar_8.log
+  log type:  text
+ closed on:   8 Mar 2020, 22:35:48
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
