@@ -1,0 +1,61 @@
+from fuzzywuzzy import fuzz
+from fuzzywuzzy import process
+
+import pandas as pd
+pd.set_option('display.max_rows',300)
+
+import time
+def process_name(df):
+ names = []
+ for name in df.iloc[:, 0]:
+ if type(name) == type("string"):
+ if "公司" in name:
+ n = name.replace("公司", "")
+ n = n.replace("有限", "")
+ n = n.replace("某", "")
+ if len(n) > 1:
+ names.append(n)
+
+ return names
+
+def match_term(term1, list_name, min_score=0):
+ max_score = -1
+ matached_name = ""
+ for term2 in list_name:
+ score = fuzz.ratio(term1, term2)
+ if (score>max_score) & (score>min_score):
+ max_score=score
+ matached_name = term2
+ return (matached_name, max_score)
+
+def match_list(list1, list2, min_score=0):
+ matched_list = []
+ for term1 in list1:
+ term2, score = match_term(term1, list2,min_score)
+ matched_list.append((term1, term2, score))
+ return matched_list
+
+
+if __name__ == '__main__':
+
+ basic= pd.read_csv("E:\Justice\company_basic_all.txt", encoding = "utf-8", usecols=["name"])
+ uniq= pd.read_csv("E:\Justice\company_name_unique_list.txt", encoding = "utf-8")
+
+ n1 = process_name(basic)
+ n2 = process_name(uniq)
+
+ # start = time.perf_counter()
+ # process.extract(n1[0],n2,limit=1)
+ # elapsed = (time.perf_counter() - start)
+ # print("Time used:", elapsed)
+ #
+ # start = time.perf_counter()
+ # print(match_term(n1[0],n2))
+ # elapsed = (time.perf_counter() - start)
+ # print("Time used:", elapsed)
+
+ start = time.perf_counter()
+ result = match_list(n2[0:50],n1,85)
+ elapsed = (time.perf_counter() - start)
+ print(result)
+ print("Time used:", elapsed)
