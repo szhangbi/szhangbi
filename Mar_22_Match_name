@@ -127,7 +127,7 @@ if __name__ == '__main__':
     #     pickle.dump(n2, outfile)
     #     outfile.close()
     # with open('E:/Justice/n2.pkl', 'rb') as infile:
-    #     D1=pickle.load(infile)
+    #     D2=pickle.load(infile)
 
 
     # start = time.perf_counter()
