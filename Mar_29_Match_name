@@ -10,10 +10,15 @@ import jieba
 jieba.load_userdict("E:/Justice/District_diction.txt")
 import jieba.posseg as pseg
 import json
+
+file = open("E:/Justice/District.json", 'r', encoding='utf-8')
+district = json.load(file)
+file.close()
+
 import pickle
 
 from collections import defaultdict
-
+import signal
 
 def process_name(df):
     Diction = dict()
@@ -42,10 +47,13 @@ def process_name(df):
 def get_district(word,diction=district):
     result=defaultdict(list)
     output=pseg.cut(word)
+
     for word, flag in output:
         result[flag].append(word)
+
     province = '未知省份'
     city = '未知城市'
+
     for prov in diction.keys():
         for ns in result[u'ns']:
             if ns == prov or ns==prov.replace("市","").replace("省","").replace("自治区","").replace("壮族","").replace("回族","").replace("蒙古族","").replace("维吾尔族",""):
@@ -107,27 +115,25 @@ def match_list(list1, list2, min_score=0):
 
 if __name__ == '__main__':
 
-    file=open("E:/Justice/District.json", 'r', encoding='utf-8')
-    district = json.load(file)
-    file.close()
 
-    basic= pd.read_csv("E:\Justice\company_basic_all.txt", encoding = "utf-8")
-    uniq= pd.read_csv("E:\Justice\company_name_unique_list.txt", encoding = "utf-8")
+    #
+    # basic= pd.read_csv("E:\Justice\company_basic_all.txt", encoding = "utf-8")
+    # uniq= pd.read_csv("E:\Justice\company_name_unique_list.txt", encoding = "utf-8")
 
-    n1 = process_name(basic)
-    n2 = proces_name_get_district(uniq)
+    #n1 = process_name(basic)
+    #n2 = proces_name_get_district(uniq)
 
 
-    # with open('E:/Justice/n1.pkl', 'wb') as outfile:
-    #     pickle.dump(n1, outfile)
-    #     outfile.close()
-    # with open('E:/Justice/n1.pkl', 'rb') as infile:
-    #     D1=pickle.load(infile)
-    # with open('E:/Justice/n2.pkl', 'wb') as outfile:
-    #     pickle.dump(n2, outfile)
-    #     outfile.close()
-    # with open('E:/Justice/n2.pkl', 'rb') as infile:
-    #     D2=pickle.load(infile)
+    # with open('E:/Justice/n1.pkl', 'wb') as outfile1:
+    #     pickle.dump(n1, outfile1)
+    #     outfile1.close()
+    with open('E:/Justice/n1.pkl', 'rb') as infile1:
+        D1=pickle.load(infile1)
+    # with open('E:/Justice/n2.pkl', 'wb') as outfile2:
+    #     pickle.dump(n2, outfile2)
+    #     outfile2.close()
+    with open('E:/Justice/n2.pkl', 'rb') as infile2:
+        D2=pickle.load(infile2)
 
 
     # start = time.perf_counter()
@@ -147,16 +153,22 @@ if __name__ == '__main__':
     # print(result)
     # print("Time used:", elapsed)
 
-    result = []
+    result =pd.DataFrame(columns={'name_uniq', 'name_basic', 'score', 'city'})
+    processed_city=[]
+    try:
+        for prov in D2.keys():
+            if prov in D1.keys():
+                for city in D2[prov].keys():
+                    if (city in D1[prov].keys()) and (city not in processed_city ):
+                        print("Processing"+city+": \n")
+                        to_add=pd.DataFrame(match_list(D2[prov][city], D1[prov][city] , min_score=80),columns={'name_uniq', 'name_basic', 'score'})
+                        to_add['city']=city
+                        result=pd.concat((result,to_add),axis=0, sort=False)
+                        processed_city.append(city)
+    except BaseException as e:
+        result.to_csv("E:/Justice/result2.csv",  mode='a', encoding="gbk")
 
-    for prov in n2.keys():
-        if prov in n1.keys():
-            for city in n2[prov].keys():
-                if city in n1[prov].keys():
-                    print("Processing"+city+": \n")
-                    result.append(match_list(n2[prov][city], n1[prov][city] , min_score=89))
 
 
-    data_out = pd.DataFrame(result,columns={'name_uniq','name_basic','score'})
-    data_out.to_csv( "E:/Justice/result.csv", encoding="gbk")
+
 
